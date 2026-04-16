@@ -1,0 +1,35 @@
+﻿DOCKER VOCABULARY - DAYS 1-2 (April 15-16, 2026)
+
+DAY 1:
+1. Dockerfile - A text file with instructions to build a Docker image
+2. Image - A blueprint for creating containers
+3. Container - A running instance of an image
+4. Tag - A label for an image (e.g., myapp:1.0)
+5. Registry - A repository of Docker images (e.g., Docker Hub)
+6. Layer - A step in Dockerfile that creates a layer
+7. COPY - Dockerfile command to copy files
+8. RUN - Dockerfile command to execute commands
+9. EXPOSE - Dockerfile command to declare ports
+10. CMD - Dockerfile command to run when container starts
+11. Port Mapping - Connecting container port to host port
+12. Base Image - The starting image for a Dockerfile (e.g., node:18)
+13. Working Directory - Directory inside container where commands run
+14. Dependencies - Libraries and packages needed by the application
+15. Containerization - Process of packaging app in a container
+
+DAY 2:
+16. docker-compose - Tool for defining multi-container applications
+17. docker-compose.yml - YAML file that defines all services
+18. services - Individual containers defined in docker-compose.yml
+19. volumes - Persistent storage that survives container shutdown
+20. networks - Internal network for service communication
+21. depends_on - Specifies service startup order and dependencies
+22. ports - Maps container port to host port (3000:3000)
+23. environment - Environment variables passed to container
+24. image - Pre-built image (vs build from Dockerfile)
+25. restart policy - Automatically restarts container if it crashes
+26. container_name - Explicit name for the container
+27. Bridge network - Type of Docker network for container communication
+28. Named volume - Volume that persists data on host machine
+29. Service discovery - Containers can reach each other by service name
+30. Multi-container app - Application with multiple Docker containers

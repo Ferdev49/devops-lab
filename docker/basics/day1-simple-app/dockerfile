@@ -1,0 +1,23 @@
+# Use Node.js official image as base
+FROM node:18
+
+# Set working directory in container
+WORKDIR /app
+
+# Copy package.json
+COPY package.json .
+
+# Install dependencies
+RUN npm install
+
+# Copy application code
+COPY index.js .
+
+# Copy docker documentation
+COPY DOCKER.md .
+
+# Expose port
+EXPOSE 3000
+
+# Run application
+CMD ["node", "index.js"]
