@@ -1,0 +1,16 @@
+﻿{
+  "name": "three-container-app",
+  "version": "3.0.0",
+  "description": "Node.js app with Redis cache and PostgreSQL database",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": ["docker", "compose", "nodejs", "redis", "postgresql"],
+  "author": "Fer",
+  "license": "MIT",
+  "dependencies": {
+    "redis": "^4.6.0",
+    "pg": "^8.10.0"
+  }
+}
