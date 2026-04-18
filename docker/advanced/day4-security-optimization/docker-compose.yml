@@ -1,0 +1,23 @@
+﻿version: '3.9'
+
+services:
+  web:
+    build: .
+    container_name: day4-secure-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - secure-network
+    restart: unless-stopped
+    # Security options
+    read_only: true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+
+networks:
+  secure-network:
+    driver: bridge
