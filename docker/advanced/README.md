@@ -1,59 +1,67 @@
-﻿# Docker Advanced - 3 Container Application
+﻿# Docker Advanced - Security & Optimization
 
-## Day 3: Three-Container Architecture
+## Day 3: Three-Container Architecture with Networking
 
 ### Services
 1. **Node.js Web Application** (port 3000)
-   - HTTP server
-   - Connects to Redis and PostgreSQL
-   - Health checks enabled
-
 2. **Redis Cache** (port 6379)
-   - In-memory cache
-   - Persistent volume (redis-data)
-   - Health checks enabled
 
-3. **PostgreSQL Database** (port 5432)
-   - Relational database
-   - Persistent volume (postgres-data)
-   - Health checks enabled
-
-### Networking
-- All services on custom bridge network (three-tier-network)
-- Service-to-service communication by name (web → redis:6379)
-- External access via port mapping
-
-### How to Run
-\\\ash
-cd day3-three-container
-docker-compose build
-docker-compose up
-curl http://localhost:3000
-\\\
-
-### Verify Services
-\\\ash
-# Check all containers running
-docker-compose ps
-
-# View logs
-docker-compose logs
-
-# Test Redis connection
-docker-compose exec web redis-cli -h redis ping
-
-# Test Database connection
-docker-compose exec web psql -h db -U postgres -d myapp -c "SELECT NOW()"
-\\\
-
-### Key Learning
+### Key Concepts
 - Docker networking with custom bridge networks
 - Service discovery and DNS resolution
 - Volume persistence for data
 - Health checks for service readiness
-- Multi-service orchestration with docker-compose
 
-### Architectures Compared
-- Day 1: Single container (Node app only)
+---
+
+## Day 4: Security & Optimization
+
+### Security Features Implemented
+- Non-root user (nodejs with UID 1001)
+- Read-only filesystem
+- Minimal base image (alpine)
+- Multi-stage build
+- Dropped unnecessary capabilities
+- Health checks enabled
+
+### Optimizations
+- Multi-stage build: 950MB → 180MB
+- Alpine base image (~180MB vs ~900MB)
+- .dockerignore file
+- Layer caching strategy
+
+### How to Run
+
+Day 3 (Networking):
+\\\ash
+cd day3-three-container
+docker-compose up
+\\\
+
+Day 4 (Security):
+\\\ash
+cd day4-security-optimization
+docker-compose up
+\\\
+
+### Security Checklist
+- [x] Non-root user
+- [x] Read-only filesystem
+- [x] Minimal base image
+- [x] Multi-stage build
+- [x] .dockerignore
+- [x] Health checks
+- [x] Drop capabilities
+- [ ] Image scanning
+- [ ] Secrets management
+
+### Architecture Evolution
+- Day 1: Single container
 - Day 2: Two containers (Node + Redis)
-- Day 3: Three containers (Node + Redis + PostgreSQL) with networking & volumes
+- Day 3: Three containers with networking
+- Day 4: Secure and optimized containers
+
+### Next Steps
+- Image vulnerability scanning
+- Docker Swarm basics
+- Transition to Kubernetes (Week 3-4)
