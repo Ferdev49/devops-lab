@@ -1,0 +1,15 @@
+﻿services:
+  swarm-app:
+    build: .
+    container_name: day5-swarm-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - swarm-network
+    restart: unless-stopped
+
+networks:
+  swarm-network:
+    driver: bridge
