@@ -1,0 +1,17 @@
+﻿version: '3.9'
+
+services:
+  secrets-app:
+    build: .
+    container_name: day6-secrets-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - secure-network
+    restart: unless-stopped
+
+networks:
+  secure-network:
+    driver: bridge
