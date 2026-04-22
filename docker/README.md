@@ -1,27 +1,30 @@
-﻿# Docker Learning Path - Complete
+﻿# Docker Learning Path - Complete Week 1
 
 ## Overview
 Comprehensive 7-day Docker learning journey from fundamentals to production-ready applications.
 
-## Week 1: Docker Fundamentals (Days 1-7)
+## Days Overview (1-7)
 
-### Day 1: Setup & Basics
+### Day 1: Docker Basics
 - Dockerfile syntax and structure
 - Building Docker images
 - Running containers
 - Basic port mapping
+- Project: Simple Node.js app
 
 ### Day 2: Multi-Container with docker-compose
 - docker-compose.yml structure
 - Service definitions
 - Basic networking
 - Dependency management
+- Project: Node.js + Redis
 
 ### Day 3: Advanced Networking
 - Custom bridge networks
 - Service discovery via DNS
 - Container-to-container communication
 - Volume persistence
+- Project: 3-container architecture
 
 ### Day 4: Security & Optimization
 - Non-root user configuration
@@ -29,42 +32,78 @@ Comprehensive 7-day Docker learning journey from fundamentals to production-read
 - Multi-stage builds
 - Image size optimization
 - Capability dropping
+- Project: Secure and optimized app
 
 ### Day 5: Orchestration Intro
 - Docker Swarm concepts
 - Manager vs Worker nodes
 - Service replication
 - Comparison: Compose vs Swarm vs Kubernetes
+- Project: Swarm introduction app
 
 ### Day 6: Secrets & Configuration
 - Docker secrets management
-- Configuration data
-- Secure credential handling
+- Configuration data handling
+- Secure credential patterns
 - Best practices for sensitive data
+- Project: Secrets and config management
 
 ### Day 7: Final Project
 - Complete production-ready application
 - All concepts combined
 - Best practices implemented
 - Ready for deployment
+- Project: Final comprehensive app
 
 ## Folder Structure
 
 \\\
 docker/
-├── basics/
-│   ├── day1-simple-app/
-│   └── README.md
-├── compose/
-│   ├── day2-multi-container/
-│   └── README.md
-├── advanced/
-│   ├── day3-three-container/
-│   ├── day4-security-optimization/
-│   ├── day5-docker-swarm/
-│   ├── day6-secrets-configs/
-│   ├── day7-final-project/
-│   └── README.md
+├── day1-simple-app/
+│   ├── app.js
+│   ├── package.json
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── day2-multi-container/
+│   ├── app.js
+│   ├── package.json
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── day3-three-container/
+│   ├── app.js
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   ├── NETWORKING.md
+│   └── VOLUMES.md
+├── day4-security-optimization/
+│   ├── app.js
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   ├── SECURITY.md
+│   └── OPTIMIZATION.md
+├── day5-docker-swarm/
+│   ├── app.js
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   ├── SWARM.md
+│   └── ORCHESTRATION.md
+├── day6-secrets-configs/
+│   ├── app.js
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   ├── SECRETS.md
+│   └── CONFIG-MANAGEMENT.md
+├── day7-final-project/
+│   ├── app.js
+│   ├── package.json
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   ├── .dockerignore
+│   └── FINAL-PROJECT.md
 └── README.md (this file)
 \\\
 
@@ -106,8 +145,8 @@ Simple Node.js application in a container
 
 - **Duration:** 7 days
 - **Projects:** 6 complete Docker applications
-- **Documentation:** 25+ files
-- **Commits:** 15+ to GitHub
+- **Documentation:** 20+ files
+- **Commits:** 16+ to GitHub
 - **Lines of code:** 1000+
 - **Technologies:** Docker, Node.js, Alpine, YAML
 
@@ -145,14 +184,48 @@ Simple Node.js application in a container
 - Use named volumes for persistence
 - Keep Dockerfiles simple and clean
 
+## How to Run Each Day
+
+\\\ash
+# Day 1
+cd day1-simple-app
+docker-compose up
+
+# Day 2
+cd day2-multi-container
+docker-compose up
+
+# Day 3
+cd day3-three-container
+docker-compose up
+
+# Day 4
+cd day4-security-optimization
+docker-compose up
+
+# Day 5
+cd day5-docker-swarm
+docker-compose up
+
+# Day 6
+cd day6-secrets-configs
+docker-compose up
+
+# Day 7
+cd day7-final-project
+docker-compose up
+
+# Then access: http://localhost:3000
+\\\
+
 ## Next Phase
 
 After Docker mastery:
-- **Terraform** (Infrastructure as Code)
-- **Kubernetes** (Production orchestration)
-- **AWS** (Cloud infrastructure)
-- **Portfolio Projects** (Real-world applications)
-- **Job Search** (Interviews and networking)
+- **Terraform** (Infrastructure as Code) - Days 8-10
+- **Kubernetes** (Production orchestration) - Week 3-4
+- **AWS** (Cloud infrastructure) - Week 3-4
+- **Portfolio Projects** (Real-world applications) - Week 5-6
+- **Job Search** (Interviews and networking) - Week 7-8
 
 ## Learning Outcomes
 
@@ -165,16 +238,6 @@ After completing this Docker journey, you will understand:
 - Orchestration fundamentals
 - Configuration management
 - Secrets handling
-
-## Resources
-
-All projects available in GitHub: devops-lab/docker
-Documentation includes:
-- Inline code comments
-- Architecture diagrams
-- Step-by-step guides
-- Best practices explanations
-- Production patterns
 
 ## Summary
 
