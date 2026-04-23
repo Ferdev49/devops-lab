@@ -1,0 +1,34 @@
+Terraform State Management - Day 8
+==================================
+    
+Project: DevOps Learning Journey
+Day: 8 (Wednesday, April 22, 2026)
+Technology: Terraform
+    
+What is Terraform?
+- Infrastructure as Code (IaC) tool
+- Manages cloud resources declaratively
+- Uses state files to track resources
+- Supports multiple cloud providers (AWS, Azure, GCP)
+    
+Key Concepts:
+1. State File (.tfstate): Tracks resource state
+2. Resources: Infrastructure objects to create
+3. Providers: Interfaces to cloud platforms
+4. Variables: Input values for configurations
+5. Outputs: Values exported from configurations
+    
+Terraform Workflow:
+1. terraform init - Initialize working directory
+2. terraform plan - Show what will be created
+3. terraform apply - Create resources
+4. terraform destroy - Remove resources
+    
+State Management:
+- Local state (default)
+- Remote state (S3, Terraform Cloud, etc.)
+- State locking for team collaboration
+- State encryption for security
+    
+Progress: Day 8/56 of DevOps Learning Journey
+Status: Terraform Basics In Progress
