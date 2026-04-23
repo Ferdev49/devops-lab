@@ -1,0 +1,17 @@
+﻿TERRAFORM VOCABULARY - DAY 8 (April 22, 2026)
+
+1. Terraform - Infrastructure as Code tool by HashiCorp
+2. Infrastructure as Code (IaC) - Managing infrastructure through code/config
+3. State file (.tfstate) - JSON file tracking resource state
+4. HCL - HashiCorp Configuration Language (Terraform syntax)
+5. Provider - Interface to cloud platform (AWS, Azure, GCP)
+6. Resource - Infrastructure object to create (EC2, S3, etc.)
+7. Variable - Input value for configuration
+8. Output - Value exported from configuration
+9. terraform init - Initialize working directory
+10. terraform plan - Show what will be created
+11. terraform apply - Create resources
+12. terraform destroy - Remove resources
+13. State locking - Prevent concurrent modifications
+14. Remote state - State stored in cloud (not local)
+15. Drift - Difference between config and actual resources

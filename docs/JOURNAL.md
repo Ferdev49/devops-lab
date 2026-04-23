@@ -76,3 +76,31 @@ Good - Less tired than yesterday, exercise helped!
 - Understand health checks in docker-compose
 - Create a 3-container application
 - Explore docker-compose override files
+
+## Week 2 - Day 8 - Wednesday, April 22, 2026
+
+### What I Learned Today
+1. What Terraform is (Infrastructure as Code)
+2. State file management and importance
+3. Terraform workflow (init → plan → apply)
+4. HCL (HashiCorp Configuration Language)
+5. Providers, resources, variables, outputs
+6. Security considerations for state files
+
+### Transition from Docker to Terraform
+- Docker: Containerizes applications
+- Terraform: Manages cloud infrastructure
+- Both: Infrastructure automation
+- Both: Version control friendly
+
+### Key Takeaway
+Terraform's state file is the foundation of infrastructure management. It's crucial to understand how to manage, secure, and collaborate on state.
+
+### Confidence Level
+6/10 - New technology, foundational concepts make sense
+
+### Next Steps
+- Learn AWS provider (Day 9)
+- Understand state locking and remote state
+- Work with modules
+- Master Terraform for production use
