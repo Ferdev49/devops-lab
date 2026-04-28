@@ -13,7 +13,7 @@ Container orchestration platform mastery. Week 3-4 focus.
 - configmap.yaml - Configuration data
 - 
 amespace.yaml - Resource organization
-- ll-in-one.yaml - Complete application
+- all-in-one.yaml - Complete application
 
 ## Key Concepts
 
@@ -27,7 +27,7 @@ amespace.yaml - Resource organization
 
 ## Quick Start
 
-\\\ash
+\\\Bash
 # Apply manifests
 kubectl apply -f all-in-one.yaml
 
@@ -45,7 +45,7 @@ kubectl logs <pod-name> -n devops-lab
 
 ## kubectl Commands Cheat Sheet
 
-\\\ash
+\\\Bash
 kubectl apply -f manifest.yaml          # Create/update resources
 kubectl get pods                        # List pods
 kubectl describe pod <n>             # Show details
@@ -57,7 +57,7 @@ kubectl scale deployment --replicas=5   # Scale
 
 ## Architecture
 
-\\\
+```text
 Namespace: devops-lab
 ├─ Deployment (3 replicas)
 │  ├─ Pod 1
@@ -65,7 +65,7 @@ Namespace: devops-lab
 │  └─ Pod 3
 ├─ Service (LoadBalancer)
 └─ ConfigMap
-\\\
+```
 
 ## Best Practices
 
