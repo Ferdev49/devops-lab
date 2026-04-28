@@ -129,5 +129,25 @@ Day 10: Realized remote state enables teams
 - Team-based IaC workflows
 - Production environments
 
-### Next: Week 3-4
-Kubernetes & AWS - where Terraform and containers come together
+## Week 3: Kubernetes Complete (Days 11-12)
+
+### Day 11: Fundamentals
+- Pods, Deployments, Services
+- ConfigMaps, Namespaces
+- Basic kubectl commands
+
+### Day 12: Advanced
+- StatefulSets for databases
+- Persistent storage with PV/PVC
+- Ingress for routing
+- Secrets for sensitive data
+
+### Week 3 Stats
+- 2 days
+- 2 projects
+- 12 YAML manifests
+- 25+ commits
+
+### Ready for Week 4
+- AWS integration
+- Solutions Architect exam prep
