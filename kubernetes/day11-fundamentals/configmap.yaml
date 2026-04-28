@@ -1,0 +1,11 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: devops-lab-config
+  namespace: default
+spec:
+  data:
+    APP_NAME: "DevOps Lab"
+    ENVIRONMENT: "production"
+    VERSION: "11.0.0"
+    DAY: "11"

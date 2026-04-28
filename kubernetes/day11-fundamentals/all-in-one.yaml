@@ -1,0 +1,74 @@
+﻿---
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devops-lab
+  labels:
+    name: devops-lab
+
+---
+# ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: devops-lab-config
+  namespace: devops-lab
+data:
+  APP_NAME: "DevOps Lab"
+  ENVIRONMENT: "production"
+  VERSION: "11.0.0"
+
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-lab-deployment
+  namespace: devops-lab
+  labels:
+    app: devops-lab
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: devops-lab
+  template:
+    metadata:
+      labels:
+        app: devops-lab
+    spec:
+      containers:
+      - name: app
+        image: node:18-alpine
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: devops-lab-config
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-lab-service
+  namespace: devops-lab
+  labels:
+    app: devops-lab
+spec:
+  type: LoadBalancer
+  selector:
+    app: devops-lab
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 3000

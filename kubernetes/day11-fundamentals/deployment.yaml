@@ -1,0 +1,45 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-lab-deployment
+  namespace: default
+  labels:
+    app: devops-lab
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: devops-lab
+  template:
+    metadata:
+      labels:
+        app: devops-lab
+        version: "1.0"
+    spec:
+      containers:
+      - name: app
+        image: node:18-alpine
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
