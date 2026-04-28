@@ -1,0 +1,124 @@
+﻿---
+# StorageClass
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-storage
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+reclaimPolicy: Retain
+
+---
+# PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: devops-lab-pvc
+  namespace: devops-lab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: fast-storage
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+# ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: devops-lab
+data:
+  db_user: "postgres"
+
+---
+# Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secret
+  namespace: devops-lab
+type: Opaque
+stringData:
+  postgres-password: "secure-password-123"
+
+---
+# Headless Service for StatefulSet
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-lab-db-service
+  namespace: devops-lab
+spec:
+  clusterIP: None
+  selector:
+    app: devops-lab-db
+  ports:
+  - port: 5432
+    targetPort: 5432
+
+---
+# StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: devops-lab-db
+  namespace: devops-lab
+spec:
+  serviceName: devops-lab-db-service
+  replicas: 3
+  selector:
+    matchLabels:
+      app: devops-lab-db
+  template:
+    metadata:
+      labels:
+        app: devops-lab-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        ports:
+        - containerPort: 5432
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: fast-storage
+      resources:
+        requests:
+          storage: 10Gi
+
+---
+# Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devops-lab-ingress
+  namespace: devops-lab
+spec:
+  rules:
+  - host: devops-lab.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: devops-lab-service
+            port:
+              number: 80
