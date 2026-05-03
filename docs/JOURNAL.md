@@ -142,11 +142,37 @@ Day 10: Realized remote state enables teams
 - Ingress for routing
 - Secrets for sensitive data
 
-### Week 3 Stats
+## Week 4: AWS Advanced (Days 13-14)
+
+### Day 13: Fundamentals
+- EC2, S3, RDS, IAM services
+- Architecture patterns
+- Cost optimization
+
+### Day 14: Advanced Services
+- Load Balancers (ALB, NLB)
+- Auto Scaling Groups
+- CloudWatch monitoring
+- Route 53 DNS
+- Lambda serverless
+
+### Integration
+Services work together:
+ALB -> ASG -> Instances
+CloudWatch -> Alarms -> Actions
+Route 53 -> DNS -> ALB
+
+### Week 4 Stats
 - 2 days
 - 2 projects
-- 12 YAML manifests
-- 25+ commits
+- 9 AWS services
+- 30+ AWS concepts
+- Ready for Solutions Architect exam prep
+
+### Architecture Understanding
+Day 13: Individual services
+Day 14: Service orchestration
+Next: Real-world deployment patterns
 
 ### Ready for Week 4
 - AWS integration
