@@ -1,0 +1,35 @@
+DOMAIN 1: HIGH AVAILABILITY (34% of exam)
+
+KEY CONCEPTS:
+- Multi-AZ deployment: Primary + standby across AZs
+- No single point of failure
+- Load balancing: ALB, NLB
+- Auto Scaling: Dynamic capacity
+- Health checks: Remove unhealthy instances
+
+SERVICES:
+- Route 53: DNS failover
+- ALB/NLB: Load balancing
+- ASG: Auto-scaling
+- RDS Multi-AZ: Database failover
+- Read Replicas: Scale reads
+- CloudWatch: Monitoring
+- ElastiCache: Cache HA
+
+UPTIME TARGETS:
+- 99.9% = 8.7 hours/year downtime
+- 99.99% = 52 minutes/year downtime
+- 99.999% = 5 minutes/year downtime
+
+FAILOVER PROCESS:
+1. Health check detects failure
+2. Route 53 updates DNS
+3. Traffic redirects
+4. Standby promoted (if applicable)
+5. New standby created
+
+EXAM SCENARIOS:
+- Design 99.99% uptime: Multi-AZ + ASG + Multi-AZ RDS
+- Eliminate single point: Add redundancy at each layer
+- Handle traffic spike: ASG + load balancer
+- Database HA: Multi-AZ or read replicas
