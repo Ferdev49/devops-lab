@@ -33,3 +33,43 @@ EXAM SCENARIOS:
 - Eliminate single point: Add redundancy at each layer
 - Handle traffic spike: ASG + load balancer
 - Database HA: Multi-AZ or read replicas
+
+DOMAIN 2: DESIGN FOR SECURITY (30% of exam)
+
+KEY CONCEPTS:
+- IAM: Access control
+- VPC: Network isolation
+- Encryption: Data protection
+- Audit: CloudTrail logging
+- Principle of Least Privilege (PoLP)
+
+IAM:
+- Users: Individual accounts
+- Groups: Collections of users
+- Roles: Temporary credentials
+- Policies: Permission documents
+- MFA: Multi-factor authentication
+
+VPC SECURITY:
+- Security Groups: Stateful, instance-level
+- NACLs: Stateless, subnet-level
+- Public subnets: Internet access
+- Private subnets: No internet
+- VPC Endpoints: Private AWS access
+
+ENCRYPTION:
+- At rest: KMS, S3 SSE, RDS encryption
+- In transit: TLS/HTTPS
+- ACM: Free SSL certificates
+- Secrets Manager: Store sensitive data
+
+AUDITING:
+- CloudTrail: API audit logs
+- CloudWatch Logs: Application logs
+- AWS Config: Configuration tracking
+- GuardDuty: Threat detection
+- VPC Flow Logs: Network monitoring
+
+SHARED RESPONSIBILITY:
+- AWS: Infrastructure, facilities, services
+- Customer: IAM, data, application, access
