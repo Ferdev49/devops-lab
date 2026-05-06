@@ -73,3 +73,42 @@ AUDITING:
 SHARED RESPONSIBILITY:
 - AWS: Infrastructure, facilities, services
 - Customer: IAM, data, application, access
+
+DOMAIN 3: DESIGN FOR PERFORMANCE (18% of exam)
+
+KEY CONCEPTS:
+- Caching: Reduce database load
+- CDN: Reduce latency globally
+- Database optimization: Faster queries
+- Monitoring: Identify bottlenecks
+
+CACHING:
+- ElastiCache: Distributed cache (Redis, Memcached)
+- Redis: Complex data, pub/sub, persistence
+- Memcached: Simple, ultra-fast
+- CloudFront: Edge caching
+
+DATABASE PERFORMANCE:
+- Read Replicas: Scale reads
+- Indexing: Faster queries
+- Query optimization: EXPLAIN plans
+- Connection pooling: Reuse connections
+
+COMPUTE:
+- Right-sizing: Match instance to workload
+- Lambda: More memory = faster CPU
+- Provisioned Concurrency: Warm starts
+- Instance types: General, Compute, Memory, Storage
+
+MONITORING:
+- CloudWatch: Metrics and alarms
+- X-Ray: Request tracing
+- Performance Insights: Query analysis
+- CloudWatch Logs Insights: Log analysis
+
+OPTIMIZATION LAYERS:
+1. Caching (10-100x faster)
+2. CDN (10-100x latency reduction)
+3. Database optimization (2-10x faster)
+4. Compute optimization (20-30% cost savings)
+5. Monitoring (identify new bottlenecks)
