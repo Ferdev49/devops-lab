@@ -69,32 +69,32 @@ Instead of running multiple docker run commands, you define all services in one 
 ### How to Use
 
 #### Start services:
-\\\ash
+\\\Bash
 docker-compose up
 \\\
 
 #### Run in background:
-\\\ash
+\\\Bash
 docker-compose up -d
 \\\
 
 #### Stop services:
-\\\ash
+\\\Bash
 docker-compose down
 \\\
 
 #### View logs:
-\\\ash
+\\\Bash
 docker-compose logs
 \\\
 
 #### View specific service logs:
-\\\ash
+\\\Bash
 docker-compose logs web
 \\\
 
 #### Execute command in running container:
-\\\ash
+\\\Bash
 docker-compose exec redis redis-cli ping
 \\\
 
