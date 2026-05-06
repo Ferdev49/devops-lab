@@ -112,3 +112,50 @@ OPTIMIZATION LAYERS:
 3. Database optimization (2-10x faster)
 4. Compute optimization (20-30% cost savings)
 5. Monitoring (identify new bottlenecks)
+
+DOMAIN 4: DESIGN FOR COST OPTIMIZATION (18% of exam)
+
+KEY CONCEPTS:
+- Purchasing options: On-Demand, RI, Spot, Savings
+- Right-sizing: Match instance to workload
+- Storage optimization: Lifecycle policies
+- Cost monitoring: Cost Explorer, Budgets
+- Data transfer: Minimize egress
+
+PURCHASING:
+- On-Demand: Full price, no commitment
+- Reserved (1yr): 30-40% savings
+- Reserved (3yr): 60-70% savings
+- Spot: 50-90% savings (interruptible)
+- Savings Plan: Flexible commitment
+
+RIGHT-SIZING:
+- Monitor CPU, memory, network usage
+- Downsize underutilized instances
+- 20-40% savings per instance
+- Review quarterly
+
+STORAGE:
+- S3 Standard: Frequent access
+- S3 Standard-IA: 30-day+ access
+- S3 Glacier: 90-day+ archive
+- S3 Deep Archive: 180-day+ archive
+- Lifecycle policies: Automate transitions
+
+DATABASE:
+- Aurora: 40% cheaper, 10x faster
+- RDS Reserved: 30-70% savings
+- Read replicas: Scale reads
+- Smaller instance: 20-40% savings
+
+OPTIMIZATION LEVELS:
+1. Quick wins: Remove unused (5-15%)
+2. Short-term: RI, right-size (15-40%)
+3. Medium-term: Lifecycle, Spot (30-50%)
+4. Long-term: Architecture (50-70%)
+
+TOOLS:
+- Cost Explorer: Visualize
+- Budgets: Set alerts
+- Trusted Advisor: Recommendations
+- Tags: Cost allocation
