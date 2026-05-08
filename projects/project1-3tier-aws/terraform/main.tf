@@ -1,6 +1,6 @@
 ﻿terraform {
   required_version = ">= 1.0"
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -8,19 +8,17 @@
     }
   }
 
-  # Uncomment for remote backend (after initial setup)
+  # Configuración de Backend (Opcional - Descomentar tras crear el bucket S3)
   # backend "s3" {
-  #   bucket         = "your-terraform-state-bucket"
+  #   bucket         = "tu-terraform-state-bucket"
   #   key            = "3-tier-app/terraform.tfstate"
   #   region         = "us-east-1"
   #   encrypt        = true
-  #   dynamodb_table = "terraform-locks"
   # }
 }
 
 provider "aws" {
   region = var.aws_region
-
   default_tags {
     tags = var.tags
   }
@@ -36,81 +34,46 @@ module "networking" {
   environment        = var.environment
 }
 
-# Load Balancer Module
-module "load_balancer" {
-  source = "./modules/load_balancer"
+# ============================================
+# ROOT OUTPUTS
+# ============================================
 
-  app_name    = var.app_name
-  environment = var.environment
-  vpc_id      = module.networking.vpc_id
-  
-  public_subnets = module.networking.public_subnet_ids
-  
-  # Will be connected to ASG in app_tier module
+output "vpc_id" {
+  description = "VPC ID"
+  value       = module.networking.vpc_id
 }
 
-# Application Tier Module
-module "app_tier" {
-  source = "./modules/app_tier"
-
-  app_name           = var.app_name
-  environment        = var.environment
-  vpc_id             = module.networking.vpc_id
-  private_subnets   = module.networking.private_subnet_ids
-  
-  instance_type      = var.instance_type
-  min_size           = var.min_size
-  max_size           = var.max_size
-  desired_capacity   = var.desired_capacity
-  
-  # ALB target group
-  target_group_arn = module.load_balancer.target_group_arn
-  
-  # Database connection (from database module)
-  db_endpoint = module.database.db_endpoint
-  db_name     = var.db_name
-  db_username = var.db_username
-  db_password = var.db_password
+output "vpc_cidr" {
+  description = "VPC CIDR block"
+  value       = module.networking.vpc_cidr
 }
 
-# Database Module
-module "database" {
-  source = "./modules/database"
-
-  app_name              = var.app_name
-  environment           = var.environment
-  vpc_id                = module.networking.vpc_id
-  db_subnets            = module.networking.db_subnet_ids
-  app_tier_sg_id        = module.app_tier.security_group_id
-  
-  db_name               = var.db_name
-  db_username           = var.db_username
-  db_password           = var.db_password
-  instance_type         = var.db_instance_type
-  allocated_storage     = 20
-  max_allocated_storage = 100
-  
-  multi_az = var.environment == "prod" ? true : false
+output "public_subnet_ids" {
+  description = "Public subnet IDs (for ALB)"
+  value       = module.networking.public_subnet_ids
 }
 
-# Outputs
-output "load_balancer_dns" {
-  description = "Load balancer DNS name"
-  value       = module.load_balancer.alb_dns_name
+output "private_subnet_ids" {
+  description = "Private subnet IDs (for App Tier)"
+  value       = module.networking.private_subnet_ids
 }
 
-output "load_balancer_url" {
-  description = "Load balancer URL"
-  value       = "http://${module.load_balancer.alb_dns_name}"
+output "db_subnet_ids" {
+  description = "Database subnet IDs (for RDS)"
+  value       = module.networking.db_subnet_ids
 }
 
-output "database_endpoint" {
-  description = "RDS database endpoint"
-  value       = module.database.db_endpoint
-  sensitive   = true
+output "alb_security_group_id" {
+  description = "ALB Security Group ID"
+  value       = module.networking.alb_security_group_id
 }
 
-output "rds_port" {
-  description = "RDS port"
-  value       = module.database.db_port
+output "app_security_group_id" {
+  description = "Application Security Group ID"
+  value       = module.networking.app_security_group_id
+}
+
+output "db_security_group_id" {
+  description = "Database Security Group ID"
+  value       = module.networking.db_security_group_id
 }
