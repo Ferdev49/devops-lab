@@ -1,5 +1,7 @@
 ﻿# Project 1: 3-Tier AWS Application Architecture
 
+I am building a production-ready 3-tier AWS application using Terraform. A 3-tier architecture separates presentation, application, and data tiers. The presentation tier has an Application Load Balancer that routes traffic to the application tier. The application tier runs EC2 instances in an Auto Scaling Group to handle varying load. The database tier runs RDS with Multi-AZ deployment for high availability. Each tier sits in private subnets within a VPC for security. The load balancer sits in public subnets to receive internet traffic. Terraform code defines all infrastructure as code, making it reproducible and versionable. I created the architecture design, Terraform structure, and module skeleton. The implementation will happen over Days 22 through 25, with networking on Day 22, load balancer on Day 23, application tier on Day 24, and database integration on Day 25. This project demonstrates production-grade infrastructure design with high availability and security."
+
 ## Overview
 Production-ready 3-tier AWS application using Terraform Infrastructure as Code.
 
