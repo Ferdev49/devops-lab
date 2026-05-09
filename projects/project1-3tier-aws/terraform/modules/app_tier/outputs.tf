@@ -15,11 +15,6 @@ output "launch_template_id" {
   value       = aws_launch_template.app.id
 }
 
-output "launch_template_latest_version" {
-  description = "Launch Template latest version"
-  value       = aws_launch_template.app.latest_version_number
-}
-
 output "iam_role_arn" {
   description = "IAM role ARN"
   value       = aws_iam_role.app_role.arn
