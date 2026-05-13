@@ -23,15 +23,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pytest pytest-cov
+        working-directory: projects/project3-cicd-pipeline
       
       - name: Run unit tests
-        run: pytest projects/project3-cicd-pipeline/tests/unit/ -v
+        run: pytest tests/unit/ -v
+        working-directory: projects/project3-cicd-pipeline
       
       - name: Run integration tests
-        run: pytest projects/project3-cicd-pipeline/tests/integration/ -v
+        run: pytest tests/integration/ -v
+        working-directory: projects/project3-cicd-pipeline
       
       - name: Run all tests with coverage
-        run: pytest projects/project3-cicd-pipeline/tests/ -v --cov=projects/project3-cicd-pipeline --cov-report=xml
+        run: pytest tests/ -v --cov=. --cov-report=xml
+        working-directory: projects/project3-cicd-pipeline
       
       - name: Upload coverage reports
         uses: codecov/codecov-action@v3
