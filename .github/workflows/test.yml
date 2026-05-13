@@ -25,13 +25,13 @@ jobs:
           pip install pytest pytest-cov
       
       - name: Run unit tests
-        run: pytest tests/unit/ -v
+        run: pytest projects/project3-cicd-pipeline/tests/unit/ -v
       
       - name: Run integration tests
-        run: pytest tests/integration/ -v
+        run: pytest projects/project3-cicd-pipeline/tests/integration/ -v
       
       - name: Run all tests with coverage
-        run: pytest tests/ -v --cov=. --cov-report=xml
+        run: pytest projects/project3-cicd-pipeline/tests/ -v --cov=projects/project3-cicd-pipeline --cov-report=xml
       
       - name: Upload coverage reports
         uses: codecov/codecov-action@v3
