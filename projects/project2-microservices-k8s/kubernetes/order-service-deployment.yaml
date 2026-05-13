@@ -36,7 +36,7 @@ spec:
         - name: SERVICE_NAME
           value: "order-service"
         - name: USER_SERVICE_URL
-          value: "http://user-service:8000"
+          value: "http://user-service.microservices.svc.cluster.local:8000"
         resources:
           requests:
             memory: "128Mi"

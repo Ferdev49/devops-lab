@@ -1,5 +1,6 @@
 ﻿from flask import Flask, jsonify, request
 import os
+import requests
 from datetime import datetime
 
 app = Flask(__name__)
@@ -9,6 +10,9 @@ orders_db = {
     1001: {"id": 1001, "user_id": 1, "items": ["item1", "item2"], "total": 99.99, "status": "completed"},
     1002: {"id": 1002, "user_id": 2, "items": ["item3"], "total": 49.99, "status": "pending"}
 }
+
+# Service URLs (from environment or defaults)
+USER_SERVICE_URL = os.environ.get('USER_SERVICE_URL', 'http://user-service:8000')
 
 @app.route('/health', methods=['GET'])
 def health():
@@ -36,10 +40,18 @@ def get_order(order_id):
 
 @app.route('/orders/user/<int:user_id>', methods=['GET'])
 def get_user_orders(user_id):
-    """Get orders by user ID"""
+    """Get orders by user ID with user info"""
+    try:
+        # Call user-service to get user info
+        user_response = requests.get(f'{USER_SERVICE_URL}/users/{user_id}', timeout=5)
+        user_data = user_response.json() if user_response.status_code == 200 else None
+    except Exception as e:
+        user_data = None
+    
     user_orders = [order for order in orders_db.values() if order["user_id"] == user_id]
     return jsonify({
         "user_id": user_id,
+        "user": user_data,
         "orders": user_orders,
         "count": len(user_orders)
     }), 200
@@ -48,6 +60,15 @@ def get_user_orders(user_id):
 def create_order():
     """Create new order"""
     data = request.get_json()
+    
+    # Validate user exists by calling user-service
+    try:
+        user_response = requests.get(f'{USER_SERVICE_URL}/users/{data.get("user_id")}', timeout=5)
+        if user_response.status_code != 200:
+            return jsonify({"error": "User not found"}), 400
+    except Exception as e:
+        return jsonify({"error": f"Could not verify user: {str(e)}"}), 500
+    
     new_id = max(orders_db.keys()) + 1 if orders_db else 1001
     new_order = {
         "id": new_id,
@@ -68,6 +89,26 @@ def update_order(order_id):
     data = request.get_json()
     orders_db[order_id].update(data)
     return jsonify(orders_db[order_id]), 200
+
+@app.route('/orders/<int:order_id>/validate', methods=['GET'])
+def validate_order(order_id):
+    """Validate order and get user info"""
+    if order_id not in orders_db:
+        return jsonify({"error": "Order not found"}), 404
+    
+    order = orders_db[order_id]
+    
+    try:
+        user_response = requests.get(f'{USER_SERVICE_URL}/users/{order["user_id"]}', timeout=5)
+        user_data = user_response.json() if user_response.status_code == 200 else None
+    except Exception as e:
+        user_data = None
+    
+    return jsonify({
+        "order": order,
+        "user": user_data,
+        "valid": user_data is not None
+    }), 200
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5001))
