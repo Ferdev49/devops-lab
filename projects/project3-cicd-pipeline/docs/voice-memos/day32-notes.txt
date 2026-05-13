@@ -1,0 +1,9 @@
+﻿Day 32 - Voice Memo Placeholder
+
+1. Unit tests prueban funciones individuales
+   Integration tests prueban cómo funciona todo junto
+
+2. Los tests automáticos detectan errores rápidamente
+   Evitan bugs en producción
+
+3. Usamos pytest para escribir y ejecutar tests
