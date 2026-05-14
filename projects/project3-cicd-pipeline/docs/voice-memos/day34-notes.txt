@@ -1,0 +1,16 @@
+﻿Day 34 - Voice Memo Notes
+
+1. Staging vs Producción:
+   - Staging: Ambiente de prueba (casi igual a producción)
+   - Producción: Ambiente real donde usan los usuarios
+
+2. ¿Por qué staging?
+   - Probar cambios sin afectar usuarios
+   - Detectar bugs antes de ir a producción
+   - Validar que todo funciona correctamente
+
+3. Después del deploy a staging:
+   - Se ejecutan tests
+   - Se verifica health check
+   - Se notifica al equipo
+   - Esperamos aprobación para ir a producción
