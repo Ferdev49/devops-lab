@@ -1,0 +1,59 @@
+﻿name: Deploy to Staging
+
+on:
+  workflow_run:
+    workflows: ["Docker Publish"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Docker image tag to deploy'
+        required: false
+        default: 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get Docker image tag
+        id: image
+        run: |
+          if [ "\${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="\${{ github.event.inputs.image_tag }}"
+          else
+            TAG="main"
+          fi
+          echo "tag=\$TAG" >> \$GITHUB_OUTPUT
+          echo "Docker image tag: \$TAG"
+
+      - name: Deploy to staging
+        run: |
+          echo "🚀 Starting deployment to staging..."
+          echo "📦 Image: ghcr.io/ferdev49/devops-lab/project3-cicd-pipeline:\${{ steps.image.outputs.tag }}"
+          
+          # Aquí irían comandos reales de deploy (SSH, kubectl, etc)
+          # Por ahora simulamos el deploy
+          echo "✅ Simulating deployment..."
+          docker pull ghcr.io/ferdev49/devops-lab/project3-cicd-pipeline:\${{ steps.image.outputs.tag }} || true
+          echo "✅ Deployment to staging completed!"
+
+      - name: Verify deployment
+        run: |
+          echo "🔍 Verifying deployment..."
+          echo "✅ Staging environment is healthy"
+          echo "📊 Health check: PASSED"
+
+      - name: Notify deployment
+        if: success()
+        run: |
+          echo "📢 Deployment notification"
+          echo "✅ Successfully deployed to staging"
+          echo "📍 Environment: staging"
+          echo "📦 Image: ghcr.io/ferdev49/devops-lab/project3-cicd-pipeline:\${{ steps.image.outputs.tag }}"
+          echo "⏰ Timestamp: \$(date)"

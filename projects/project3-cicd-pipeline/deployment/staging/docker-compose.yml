@@ -1,0 +1,24 @@
+﻿version: '3.9'
+
+services:
+  app:
+    image: ghcr.io/ferdev49/devops-lab/project3-cicd-pipeline:main
+    container_name: project3-staging
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=staging
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "from app import hello_world; hello_world()"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - project3-network
+
+networks:
+  project3-network:
+    driver: bridge

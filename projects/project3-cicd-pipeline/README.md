@@ -1,7 +1,7 @@
 ﻿# Project 3: CI/CD Pipeline with GitHub Actions
 
 ## Overview
-Automatización de build, testing y deployment usando GitHub Actions.
+Automatización de build, testing, deployment usando GitHub Actions.
 
 ## Estructura del Proyecto
 
@@ -10,24 +10,27 @@ project3-cicd-pipeline/
 ├── .github/workflows/
 │   ├── lint.yml              # Code quality checks ✅
 │   ├── test.yml              # Testing workflow ✅
-│   ├── docker-publish.yml    # Docker build & push ⏳
-│   └── deploy.yml            # Deployment (próximo)
+│   ├── docker-publish.yml    # Docker build & push ✅
+│   └── deploy-staging.yml    # Deploy to staging ⏳
+├── deployment/
+│   ├── staging/
+│   │   ├── docker-compose.yml
+│   │   └── deploy.sh
+│   └── production/           # Próximo
 ├── tests/
 │   ├── unit/
-│   │   └── test_app.py
 │   ├── integration/
-│   │   └── test_workflow.py
 │   └── e2e/
 ├── docs/
 │   ├── CI-CD-GUIDE.md
 │   ├── TESTING-GUIDE.md
 │   ├── DOCKER-GUIDE.md
+│   ├── DEPLOYMENT-GUIDE.md
 │   └── voice-memos/
-├── app.py                    # Main application
-├── Dockerfile                # Container image
-├── .dockerignore
-├── requirements.txt          # Python dependencies
-├── .gitignore
+├── app.py
+├── Dockerfile
+├── requirements.txt
+├── .env.example
 └── README.md
 ```
 
@@ -35,85 +38,74 @@ project3-cicd-pipeline/
 
 - [x] Lint & Code Quality (lint.yml) ✅
 - [x] Unit Testing (test.yml) ✅
-- [ ] Docker Build & Push (docker-publish.yml)
-- [ ] Deployment Automation
-- [ ] E2E Testing & Refinement
+- [x] Docker Build & Push (docker-publish.yml) ✅
+- [ ] Deploy to Staging (deploy-staging.yml)
+- [ ] E2E Testing & Production Ready
 
 ## Workflows Implementados
 
 ### lint.yml ✅
-Valida la calidad del código usando Black, Flake8, Pylint.
-**Status: ✅ Success (10s)**
+Valida calidad del código.
+**Status: ✅ Success (13s)**
 
 ### test.yml ✅
-Ejecuta tests unitarios e integración con pytest.
-**Status: ✅ Success (15s)** - 10/10 test cases passing
+Ejecuta tests (10/10 passing).
+**Status: ✅ Success (16s)**
 
-### docker-publish.yml (HOY)
-Build y push de imagen Docker a GitHub Container Registry (GHCR).
-- Multi-stage Dockerfile (optimizado)
-- Health checks incluidos
-- Automatic tagging (branch, SHA, semver)
-- Layer caching para builds rápidos
+### docker-publish.yml ✅
+Build y push de imagen Docker.
+**Status: ✅ Success (33s)**
 
-## Cómo ejecutar localmente
+### deploy-staging.yml (HOY)
+Deploy automático a staging después de Docker Publish.
+- Triggered by Docker Publish workflow
+- Automatic deployment to staging
+- Health check verification
+- Notification support
 
-### Linting
-```text Bash
-pip install -r requirements.txt
-black . --check
-flake8 .
-```
-
-### Testing
-```text Bash
-pytest tests/ -v
-pytest tests/ -v --cov=.
-```
-
-### Docker
-```text Bash
-# Build
-docker build -t project3-cicd:latest .
-
-# Run
-docker run -it project3-cicd:latest
-
-# Push (si tienes acceso a registry)
-docker push ghcr.io/ferdev49/devops-lab/project3:latest
-```
-
-## CI/CD Pipeline
+## CI/CD Pipeline Completo
 
 ```text
 Push to main
     ↓
-Lint & Validate (10s) ✅
+Lint & Validate (13s) ✅
     ↓
-Tests (15s) ✅
+Tests (16s) ✅
     ↓
-Docker Build & Push (30s) ⏳
+Docker Build & Push (33s) ✅
     ↓
-Deploy to staging (próximo)
+Deploy to Staging (automatic) ⏳
+    ↓
+Manual approval
+    ↓
+Deploy to Production (próximo)
+```
+
+## Cómo ejecutar localmente
+
+### Deploy a Staging
+```text Bash
+cd deployment/staging
+docker-compose up -d
+docker-compose logs -f
+```
+
+### Verificar Health
+```text Bash
+docker-compose ps
+docker-compose exec app python -c "from app import hello_world; hello_world()"
 ```
 
 ## Progress
 
 - [x] Day 31: Lint workflow setup ✅
 - [x] Day 32: Testing workflow ✅
-- [ ] Day 33: Docker publish workflow (HOY)
-- [ ] Day 34: Deployment workflow
-- [ ] Day 35: E2E testing & refinement
-
-## Registry
-
-**GitHub Container Registry**: ghcr.io/ferdev49/devops-lab/project3
-
-### Ver imágenes
-https://github.com/Ferdev49/devops-lab/pkgs/container/project3-cicd-pipeline
+- [x] Day 33: Docker publish workflow ✅
+- [ ] Day 34: Deploy to staging (HOY)
+- [ ] Day 35: E2E testing & production ready
 
 ## Recursos
 
-- [Docker Documentation](https://docs.docker.com/)
-- [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
-- [Multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [GitHub Actions Workflows](https://docs.github.com/en/actions)
+- [Deployment Strategies](https://martinfowler.com/bliki/BlueGreenDeployment.html)
