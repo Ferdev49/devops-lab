@@ -1,0 +1,15 @@
+﻿Day 33 - Voice Memo Notes
+
+1. Imagen Docker vs Contenedor:
+   - Imagen: Template/blueprint (como una clase)
+   - Contenedor: Instancia ejecutando (como un objeto)
+
+2. Multi-stage build:
+   - Stage 1 (Builder): Instala todas las dependencias
+   - Stage 2 (Runtime): Copia solo lo necesario
+   - Resultado: Imagen más pequeña y segura
+
+3. HEALTHCHECK:
+   - Verifica que la app sigue funcionando
+   - Si falla, Docker puede reiniciar el contenedor
+   - Importante para monitoring en producción
