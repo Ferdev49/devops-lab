@@ -1,0 +1,24 @@
+﻿Day 35 - Final Voice Memo
+
+Reflexión sobre el proyecto completo:
+
+1. ¿Qué aprendiste en estos 5 días?
+   - GitHub Actions workflow
+   - Docker containerization
+   - Testing automation
+   - Deployment strategies
+
+2. ¿Cuál fue el mayor desafío?
+   - Debuggear errores de sintaxis YAML
+   - Configurar imports en tests
+   - Entender el flujo del pipeline
+
+3. ¿Cómo te sientes ahora?
+   - Confiado en CI/CD
+   - Listo para producción
+   - Preparado para el job market
+
+4. ¿Qué sigue?
+   - Aplicar a DevOps jobs
+   - Continuar aprendiendo
+   - Mejorar el portfolio
