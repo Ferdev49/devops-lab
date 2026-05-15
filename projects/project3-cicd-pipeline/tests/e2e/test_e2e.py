@@ -4,11 +4,9 @@ Tests the entire application from start to finish
 """
 import sys
 import os
-import subprocess
-import time
 
 # Agregar el directorio padre al path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from app import add, subtract, hello_world
 
@@ -103,7 +101,7 @@ class TestProductionReadiness:
             result = add(5, 3)
             assert result == 8
         except Exception as e:
-            pytest.fail(f"Unexpected error: {e}")
+            raise AssertionError(f"Unexpected error: {e}")
     
     def test_response_time(self):
         """Test that operations complete in reasonable time"""
